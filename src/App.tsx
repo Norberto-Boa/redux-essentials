@@ -2,16 +2,19 @@ import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { increment, incrementAmount } from './features/counter/counter-slice'
+import { useAppSelector } from './hooks'
 
 function App() {
   const [amount, setAmount] = useState<number>(0);
 
-  const count = useSelector(state => state.counter.value);
+  const count = useAppSelector(state => state.counter.value);
   const dispatch = useDispatch();
 
 
   function handleClick() {
-    dispatch({ type: 'counter/increment' });
+    // dispatch({ type: 'counter/increment' });
+    dispatch(increment());
   }
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -19,7 +22,8 @@ function App() {
   }
 
   function handleIncrementAmount() {
-    dispatch({ type: 'counter/incrementAmount', payload: amount });
+    // dispatch({ type: 'counter/incrementAmount', payload: amount });
+    dispatch(incrementAmount(amount));
   }
   return (
     <div className="App">
